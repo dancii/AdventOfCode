@@ -16,7 +16,7 @@ def part_one(input):
             dx, dy = -dy, dx
         x, y = x+dx, y+dy
     steps = abs(startX-0)+abs(startY-0)
-    print(spiral_list)
+    #print(spiral_list)
     print(steps)
 
 def part_two(input):
@@ -27,7 +27,6 @@ def part_two(input):
     dx = 0
     dy = -1
     while True:
-        print(spiral_list)
         if (-X/2 < x <= X/2) and (-Y/2 < y <= Y/2):
             if i > 1:
                 spiral_list[x][y] = check_around_for_neighbors_num(spiral_list,x,y,X,Y)
@@ -41,7 +40,7 @@ def part_two(input):
         x, y = x+dx, y+dy
         i+=1
 
-def check_around_for_neighbors_num(spiral_list,x,y, X, Y):
+def check_around_for_neighbors_num(spiral_list,x,y,X,Y):
     sum = 0
     #left
     if (-X/2 <= (x-1) <= X/2):
@@ -68,7 +67,21 @@ def check_around_for_neighbors_num(spiral_list,x,y, X, Y):
         right = spiral_list[x+1][y]
         if isinstance(right, int):
             sum += right
-    #print(sum)
+    #down left diagonally
+    if (-X/2 < (x-1) <= X/2) and (-Y/2 < y-1 <= Y/2):
+        left_diagonally = spiral_list[x-1][y-1]
+        if isinstance(left_diagonally, int):
+            sum += left_diagonally
+    #down
+    if (-Y/2 < y-1 <= Y/2):
+        up = spiral_list[x][y-1]
+        if isinstance(up, int):
+            sum += up
+    #down right diagonally
+    if (-X/2 < (x+1) <= X/2) and (-Y/2 < y-1 <= Y/2):
+        right_diagonally = spiral_list[x+1][y-1]
+        if isinstance(right_diagonally, int):
+            sum += right_diagonally
     return sum
 #part_one(515)
 

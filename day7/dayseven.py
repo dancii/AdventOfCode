@@ -30,8 +30,9 @@ def part_one():
 
 def find_parent(programs, child_name):
     for program in programs:
-        if child_name in program.children:
-            return program.name
+        if program.children is not None:
+            if child_name in program.children:
+                return program
 
 def part_two():
     programs = []
@@ -60,8 +61,11 @@ def part_two():
 
     #loop, find all with children, find the children and add their parent, MAYBE NO NEED FOR THIS
     for program in programs:
-        print(program.name)
-        if program.children is not None:
-            print(program.children)
+        program.parent = find_parent(programs, program.name)
+        
+    root = None
+    for program in programs:
+        if program.parent is None:
+            
 
 part_two()
